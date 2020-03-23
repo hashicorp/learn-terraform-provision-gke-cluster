@@ -82,7 +82,7 @@ The
 and [Region](https://github.com/hashicorp/learn-terraform-provision-gke-cluster/blob/master/vpc.tf#L29)
  correspond to the resources spun up by Terraform.
 
-## Deploy and log into Kubernetes Dashboard
+## Deploy and access Kubernetes Dashboard
 
 To deploy the Kubernetes dashboard, run the following command. This will schedule 
 the resources necessary for the dashboard.
@@ -117,7 +117,7 @@ able to access the Kubernetes dashboard at [http://127.0.0.1:8001/api/v1/namespa
 
 ## Authenticate to Kubernetes Dashboard
 
-To access the Kubernetes dashboard, you need to provide an authorization token. 
+To view the Kubernetes dashboard, you need to provide an authorization token. 
 Authenticating using `kubeconfig` is **not** an option. You can read more about
 it in the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#accessing-the-dashboard-ui).
 
