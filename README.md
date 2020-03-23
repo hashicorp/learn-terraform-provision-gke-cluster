@@ -19,6 +19,10 @@ Once you've initialized gcloud (signed in, selected project), add your account
 to the Application Default Credentials (ADC). This will allow Terraform to access
 these credentials to provision resources on GCloud.
 
+```shell
+$ gcloud auth application-default login
+```
+
 ## Initialize Terraform workspace and provision GKE Cluster
 
 Replace `terraform.tfvars` values with your `project_id` and `region`. Your 
