@@ -65,7 +65,13 @@ output "kubernetes_cluster_name" {
   description = "GKE Cluster Name"
 }
 
-# Kubernetes provider
+# # Kubernetes provider
+# # The Terraform Kubernetes Kubernetes configuration below is used as a learning reference only. 
+# # It references the variables and resources provisioned in this file. 
+# # We recommend you put this in another file -- so you can have a more modular configuration.
+# # https://learn.hashicorp.com/terraform/kubernetes/provision-gke-cluster#optional-configure-terraform-kubernetes-provider
+# # To learn how to schedule deployments and services using the provider, go here: http://localhost:3000/terraform/kubernetes/deploy-nginx-kubernetes.
+
 # provider "kubernetes" {
 #   load_config_file = "false"
 
