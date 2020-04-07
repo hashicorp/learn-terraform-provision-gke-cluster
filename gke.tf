@@ -66,7 +66,7 @@ output "kubernetes_cluster_name" {
 }
 
 # # Kubernetes provider
-# # The Terraform Kubernetes Kubernetes configuration below is used as a learning reference only. 
+# # The Terraform Kubernetes Provider configuration below is used as a learning reference only. 
 # # It references the variables and resources provisioned in this file. 
 # # We recommend you put this in another file -- so you can have a more modular configuration.
 # # https://learn.hashicorp.com/terraform/kubernetes/provision-gke-cluster#optional-configure-terraform-kubernetes-provider
