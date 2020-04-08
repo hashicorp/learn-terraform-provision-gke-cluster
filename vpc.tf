@@ -7,8 +7,8 @@ variable "region" {
 }
 
 provider "google" {
-  project = "${var.project_id}"
-  region  = "${var.region}"
+  project = var.project_id
+  region  = var.region
 }
 
 # VPC
@@ -20,13 +20,13 @@ resource "google_compute_network" "vpc" {
 # Subnet
 resource "google_compute_subnetwork" "subnet" {
   name          = "${var.project_id}-subnet"
-  region        = "${var.region}"
-  network       = "${google_compute_network.vpc.name}"
+  region        = var.region
+  network       = google_compute_network.vpc.name
   ip_cidr_range = "10.10.0.0/24"
 
 }
 
 output "region" {
-  value       = "${var.region}"
+  value       = var.region
   description = "region"
 }
