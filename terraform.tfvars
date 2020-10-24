@@ -1,2 +1,2 @@
-project_id = "REPLACE_ME"
-region     = "us-central1"
+project_id = "intricate-muse-290617"
+region     = "europe-west2-a"
