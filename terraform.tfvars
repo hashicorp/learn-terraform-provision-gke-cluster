@@ -1,2 +1,2 @@
-project_id = "REPLACE_ME"
-region     = "us-central1"
+project_id = "homedepot-342320"
+region     = "us-east1-c"
