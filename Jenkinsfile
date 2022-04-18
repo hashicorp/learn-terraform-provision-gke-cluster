@@ -13,17 +13,17 @@ pipeline {
         }
         stage("Terraform Init") {
             steps {
-                sh "terraform init"
+                sh "/usr/local/bin/terraform init"
             }
         }
         stage("Terraform Plan") {
             steps {
-                sh "terraform plan"
+                sh "/usr/local/bin/terraform plan"
             }
         }
         stage("Terraform Apply") {
             steps {
-                sh "terraform apply --auto-approve"
+                sh "/usr/local/bin/terraform apply --auto-approve"
             }
         }
     }   
