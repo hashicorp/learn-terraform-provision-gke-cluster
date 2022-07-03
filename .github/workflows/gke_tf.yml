@@ -44,9 +44,9 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
         run: terraform destroy -auto-approve
         
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
-        run: terraform apply -auto-approve
+#     - name: Terraform Apply
+#      if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
+#      run: terraform apply -auto-approve
   
 #  bootstrap:
 #    name: bootstrap-cluster
