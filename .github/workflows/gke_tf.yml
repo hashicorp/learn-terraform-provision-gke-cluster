@@ -5,7 +5,7 @@ on:
     paths:
     - 'gke_tf/**' 
     branches:
-      - master
+      - main
   pull_request:
 
 jobs:
