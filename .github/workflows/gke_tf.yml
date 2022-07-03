@@ -1,0 +1,65 @@
+name: "Cluster Creation"
+
+on:
+  push:
+    paths:
+    - 'gke_tf/**' 
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  terraform:
+    env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SECRET }}
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        working-directory: [gke_tf]
+    defaults:
+      run:
+        working-directory: ${{ matrix.working-directory }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+          
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+#      - name: Terraform Apply
+#        if: github.ref == 'refs/heads/master' && github.event_name == 'push' 
+#        run: terraform apply -auto-approve
+  
+#  bootstrap:
+#    name: bootstrap-cluster
+#    runs-on: ubuntu-latest
+#    needs: terraform
+#    steps:    
+#      - id: get-credentials
+#        if: github.ref == 'refs/heads/master' && github.event_name == 'push' 
+#        uses: google-github-actions/get-gke-credentials@main
+#        with:
+#          cluster_name: production-cluster
+#          location: us-east1
+#          credentials: ${{ secrets.GCP_SECRET }}
+      
+#      - id: get-pods
+#        if: github.ref == 'refs/heads/master' && github.event_name == 'push' 
+#        run: kubectl get pods -A 
