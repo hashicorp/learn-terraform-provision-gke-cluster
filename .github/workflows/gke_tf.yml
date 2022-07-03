@@ -11,7 +11,7 @@ on:
 jobs:
   terraform:
     env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SECRET }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
     name: "Terraform"
     runs-on: ubuntu-latest
     strategy:
