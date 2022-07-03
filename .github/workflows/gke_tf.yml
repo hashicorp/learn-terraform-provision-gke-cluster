@@ -11,7 +11,7 @@ on:
 jobs:
   terraform:
     env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SECRET }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
     name: "Terraform"
     runs-on: ubuntu-latest
     strategy:
@@ -25,9 +25,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
 
       - name: Terraform Init
         id: init
@@ -43,9 +40,9 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-#      - name: Terraform Apply
-#        if: github.ref == 'refs/heads/master' && github.event_name == 'push' 
-#        run: terraform apply -auto-approve
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push' 
+        run: terraform apply -auto-approve
   
 #  bootstrap:
 #    name: bootstrap-cluster
