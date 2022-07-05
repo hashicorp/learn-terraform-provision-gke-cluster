@@ -1,0 +1,51 @@
+name: "Cluster Creation"
+
+on:
+  push:
+    paths:
+    - 'gke_tf/**' 
+    - '.github/workflows/gke_tf.yml'
+    branches:
+      - main
+  pull_request:
+  
+
+jobs:
+  terraform:
+    env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        working-directory: [gke_tf]
+    defaults:
+      run:
+        working-directory: ${{ matrix.working-directory }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+          
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+        
+      - name: Terraform Destroy
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
+        run: terraform destroy -auto-approve
+        
+#     - name: Terraform Apply
+#      if: github.ref == 'refs/heads/main' &&  github.event.pull_request.merged == true 
+#      run: terraform apply -auto-approve
