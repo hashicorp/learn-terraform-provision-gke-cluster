@@ -4,11 +4,24 @@ on:
   push:
     paths:
     - 'gke_tf/**' 
+    - '.github/workflows/gke_tf.yml'
     branches:
       - main
   pull_request:
+  
+#on:
+#  pull_request:
+#    types:
+#      - closed
+
+
 
 jobs:
+ # if_merged:
+ #   if: github.event.pull_request.merged == true
+ #   steps:
+ #   - run: |
+ #       echo The PR was merged
   terraform:
     env:
         GOOGLE_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
@@ -45,7 +58,7 @@ jobs:
         run: terraform destroy -auto-approve
         
 #     - name: Terraform Apply
-#      if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
+#      if: github.ref == 'refs/heads/main' &&  github.event.pull_request.merged == true 
 #      run: terraform apply -auto-approve
   
 #  bootstrap:
