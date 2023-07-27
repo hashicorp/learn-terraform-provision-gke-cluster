@@ -1,6 +1,7 @@
 name: "github-workflow"
 on: "pull_request"
 env:
- TF_CLOUD_ORGANIZATION: ""
+ TF_CLOUD_ORGANIZATION: "gcp-infra-01"
  TF_API_TOKEN: "${{secrets.TF_API_TOKEN}}"
- TF_WORKSPACE: ""
+ TF_WORKSPACE: "dev-01"
+ CONFIG_DIRECTORY: "./"
